@@ -1,5 +1,6 @@
 package ru.gb.model;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.gb.repository.ProductRepository;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
+    @Getter
     private final ProductRepository productRepository;
     private final List<Product> products;
 

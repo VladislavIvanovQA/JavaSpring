@@ -1,7 +1,7 @@
 package ru.gb.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.gb.model.Cart;
-import ru.gb.repository.ProductRepository;
 import ru.gb.utils.CommandEnum;
 
 import java.io.BufferedReader;
@@ -9,21 +9,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class ConsoleService {
-    private final ProductRepository productRepository;
     private final Cart cart;
 
-    public ConsoleService() {
-        this.productRepository = new ProductRepository();
-        this.cart = new Cart(productRepository);
+    @Autowired
+    public ConsoleService(Cart cart) {
+        this.cart = cart;
     }
 
     private void printCommand() {
         StringBuilder builder = new StringBuilder();
-        builder.append(CommandEnum.SHOWP).append(" ").append("Available list products.").append("\n");
-        builder.append(CommandEnum.SHOWC).append(" ").append("See products in cart.").append("\n");
-        builder.append(CommandEnum.ADD).append(" 0").append(" ").append("Added product in cart by id.").append("\n");
-        builder.append(CommandEnum.REMOVE).append(" 0").append(" ").append("Remove product in cart by id.").append("\n");
-        builder.append(CommandEnum.CLEAR).append(" ").append("Remove all products in cart.").append("\n");
+        builder.append(CommandEnum.SHOWP.name().toLowerCase()).append(" ").append("Available list products.").append("\n");
+        builder.append(CommandEnum.SHOWC.name().toLowerCase()).append(" ").append("See products in cart.").append("\n");
+        builder.append(CommandEnum.ADD.name().toLowerCase()).append(" 0").append(" ").append("Added product in cart by id.").append("\n");
+        builder.append(CommandEnum.REMOVE.name().toLowerCase()).append(" 0").append(" ").append("Remove product in cart by id.").append("\n");
+        builder.append(CommandEnum.CLEAR.name().toLowerCase()).append(" ").append("Remove all products in cart.").append("\n");
         System.out.println(builder);
     }
 
@@ -54,7 +53,7 @@ public class ConsoleService {
         try {
             switch (CommandEnum.valueOf(commandType.toUpperCase())) {
                 case SHOWP: {
-                    productRepository.printProducts();
+                    cart.getProductRepository().printProducts();
                     break;
                 }
                 case SHOWC: {
