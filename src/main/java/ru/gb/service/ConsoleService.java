@@ -51,37 +51,42 @@ public class ConsoleService {
     }
 
     private void execCommand(String commandType, int id) {
-        switch (CommandEnum.valueOf(commandType.toUpperCase())) {
-            case SHOWP: {
-                productRepository.printProducts();
-                break;
+        try {
+            switch (CommandEnum.valueOf(commandType.toUpperCase())) {
+                case SHOWP: {
+                    productRepository.printProducts();
+                    break;
+                }
+                case SHOWC: {
+                    cart.printCart();
+                    break;
+                }
+                case ADD: {
+                    cart.addProduct(id);
+                    System.out.printf("Product %s added!\n", id);
+                    cart.printCart();
+                    break;
+                }
+                case REMOVE: {
+                    cart.deleteProduct(id);
+                    System.out.printf("Product %s deleted!\n", id);
+                    cart.printCart();
+                    break;
+                }
+                case CLEAR: {
+                    cart.removeAllProductInCart();
+                    System.out.println("All products removing!");
+                    break;
+                }
+                default: {
+                    System.err.println("No such command please try again!");
+                    printCommand();
+                    break;
+                }
             }
-            case SHOWC: {
-                cart.printCart();
-                break;
-            }
-            case ADD: {
-                cart.addProduct(id);
-                System.out.printf("Product %s added!\n", id);
-                cart.printCart();
-                break;
-            }
-            case REMOVE: {
-                cart.deleteProduct(id);
-                System.out.printf("Product %s deleted!\n", id);
-                cart.printCart();
-                break;
-            }
-            case CLEAR: {
-                cart.removeAllProductInCart();
-                System.out.println("All products removing!");
-                break;
-            }
-            default: {
-                System.err.println("No such command please try again!");
-                printCommand();
-                break;
-            }
+        } catch (IllegalArgumentException e) {
+            System.err.println("No such command please try again!");
+            printCommand();
         }
     }
 }
