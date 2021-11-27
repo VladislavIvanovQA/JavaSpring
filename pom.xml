@@ -11,6 +11,7 @@
 
     <modules>
         <module>HW2</module>
+        <module>HW3</module>
     </modules>
 
     <properties>
