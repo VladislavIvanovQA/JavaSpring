@@ -12,7 +12,6 @@ public class Cart {
     private final ProductRepository productRepository;
     private final List<Product> products;
 
-    @Autowired
     public Cart(ProductRepository productRepository) {
         this.productRepository = productRepository;
         this.products = new ArrayList<>();

@@ -10,7 +10,6 @@ import java.util.Random;
 public class ProductRepository {
     private final List<Product> products;
 
-    @Autowired
     public ProductRepository() {
         this.products = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
