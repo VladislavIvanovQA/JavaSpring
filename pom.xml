@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>HW3</module>
         <module>HW2</module>
     </modules>
 
